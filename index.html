@@ -230,6 +230,17 @@
     border-radius: 999px;
     transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   }
+  .contact-link {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-soft);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .contact-link:hover { color: var(--accent); }
 </style>
 </head>
 <body>
@@ -247,6 +258,7 @@
       <span><span class="count" id="done-count">0</span> / <span id="total-count">0</span> 완료</span>
       <div class="progress"><div class="progress-bar" id="progress-bar"></div></div>
     </div>
+    <a class="contact-link" href="./contact.html">제휴문의 →</a>
   </div>
 
 <script>
