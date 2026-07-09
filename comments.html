@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>방명록</title>
+<style>
+  :root {
+    --bg: #f4f5f7;
+    --surface: #ffffff;
+    --surface-2: #fafafc;
+    --border: #ececf1;
+    --text: #1c1c22;
+    --text-soft: #8a8a95;
+    --text-faint: #b8b8c2;
+    --accent: #6d5efc;
+    --accent-soft: #eeecff;
+    --shadow: 0 20px 60px -18px rgba(38, 30, 92, 0.28);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0e0e13;
+      --surface: #17171f;
+      --surface-2: #1d1d27;
+      --border: #26262f;
+      --text: #ececf1;
+      --text-soft: #8f8fa0;
+      --text-faint: #55555f;
+      --accent: #8b7dff;
+      --accent-soft: #23203a;
+      --shadow: 0 24px 70px -20px rgba(0, 0, 0, 0.65);
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', 'Segoe UI', 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    background:
+      radial-gradient(1100px 600px at 15% -10%, rgba(109, 94, 252, 0.16), transparent 60%),
+      radial-gradient(900px 600px at 110% 10%, rgba(240, 80, 110, 0.10), transparent 55%),
+      var(--bg);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 56px 20px;
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .card {
+    background: var(--surface);
+    width: 100%;
+    max-width: 640px;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+    padding: 34px 30px 30px;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  h1 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .lead {
+    font-size: 14px;
+    color: var(--text-soft);
+    line-height: 1.5;
+    margin-bottom: 26px;
+  }
+
+  .comments-wrap {
+    padding-top: 22px;
+    border-top: 1px solid var(--border);
+  }
+
+  .notice {
+    padding: 16px;
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    background: var(--surface-2);
+    color: var(--text-soft);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .notice code {
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 12px;
+  }
+
+  .back {
+    display: inline-block;
+    margin-top: 24px;
+    font-size: 13px;
+    color: var(--text-soft);
+    text-decoration: none;
+  }
+  .back:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="eyebrow">Guestbook</div>
+    <h1>방명록</h1>
+    <p class="lead">자유롭게 의견이나 인사를 남겨주세요. 댓글은 Disqus로 운영됩니다.</p>
+
+    <div class="comments-wrap">
+      <!-- Disqus comments -->
+      <div id="disqus_thread"></div>
+      <noscript class="notice">
+        댓글을 보려면 JavaScript를 활성화해주세요.
+        <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+      </noscript>
+    </div>
+
+    <a class="back" href="./index.html">← 할 일 목록으로</a>
+  </div>
+
+<script>
+  /**
+   * Disqus 설정
+   * 아래 DISQUS_SHORTNAME 값을 본인의 Disqus shortname으로 바꾸면 댓글이 활성화됩니다.
+   * (https://disqus.com/admin/create/ 에서 발급)
+   */
+  var DISQUS_SHORTNAME = 'YOUR_SHORTNAME';
+
+  (function () {
+    if (DISQUS_SHORTNAME === 'YOUR_SHORTNAME') {
+      document.getElementById('disqus_thread').innerHTML =
+        '<div class="notice">Disqus <b>shortname</b>이 아직 설정되지 않았습니다. ' +
+        'comments.html의 <code>DISQUS_SHORTNAME</code> 값을 발급받은 shortname으로 교체하세요.</div>';
+      return;
+    }
+
+    window.disqus_config = function () {
+      this.page.url = window.location.href;
+      this.page.identifier = window.location.pathname;
+    };
+
+    var d = document, s = d.createElement('script');
+    s.src = 'https://' + DISQUS_SHORTNAME + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+</body>
+</html>
